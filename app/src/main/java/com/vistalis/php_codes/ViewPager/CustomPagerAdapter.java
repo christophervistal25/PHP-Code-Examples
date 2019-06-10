@@ -27,7 +27,12 @@ public class CustomPagerAdapter extends PagerAdapter {
         // Setting an event for each button for a view pager layout.
         layout.findViewById(R.id.btnGoto).setOnClickListener(v -> {
             Toast.makeText(mContext, (CharSequence) v.getTag(), Toast.LENGTH_SHORT).show();
-            // Process for opening an fragment here.
+
+            // Remove all layouts
+            layout.removeAllViews();
+
+            // Open the fragment.
+
         });
 
 

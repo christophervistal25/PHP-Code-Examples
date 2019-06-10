@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">PHP-Codes</string>
-    <string name="red">Red</string>
-    <string name="blue">Blue</string>
-    <string name="green">Green</string>
+    <string name="basics">Basics</string>
+    <string name="arrays">Arrays</string>
+    <string name="math">Math</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

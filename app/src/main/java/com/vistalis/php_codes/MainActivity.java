@@ -1,5 +1,7 @@
 package com.vistalis.php_codes;
 
+import android.content.Intent;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,26 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new CustomPagerAdapter(this));
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+              case R.id.action_favorites:
+                  Toast.makeText(this, "You clicked the favorites button", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.action_feedback:
+                  Toast.makeText(this, "You clicked the feedback button", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.action_playground:
+                    Toast.makeText(this, "You clicked the playground button", Toast.LENGTH_SHORT).show();
+                    break;
+
+            }
+            return true;
+        });
+
      }
 
 

@@ -5,9 +5,9 @@ import com.vistalis.php_codes.R;
 public enum ModelObject {
 
 
-        BLUE(R.string.blue, R.layout.view_blue),
-        RED(R.string.red, R.layout.view_red),
-        GREEN(R.string.green, R.layout.view_green);
+        BASICS(R.string.basics, R.layout.view_basics),
+        ARRAYS(R.string.arrays, R.layout.view_arrays),
+        MATH(R.string.math, R.layout.view_math);
 
         private int mTitleResId;
         private int mLayoutResId;

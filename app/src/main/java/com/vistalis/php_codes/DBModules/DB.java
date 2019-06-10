@@ -6,8 +6,11 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.vistalis.php_codes.DBModules.Models.Articles;
+import com.vistalis.php_codes.DBModules.Models.Categories;
 
-@Database(entities = {},version = 1)
+
+@Database(entities = {Categories.class, Articles.class},version = 1)
 public abstract class DB extends RoomDatabase {
 
     private static DB appDatabase;

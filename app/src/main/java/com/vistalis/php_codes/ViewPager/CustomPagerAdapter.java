@@ -5,6 +5,9 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.vistalis.php_codes.R;
 
 public class CustomPagerAdapter extends PagerAdapter {
 
@@ -19,7 +22,17 @@ public class CustomPagerAdapter extends PagerAdapter {
         ModelObject modelObject = ModelObject.values()[position];
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
+
+
+        // Setting an event for each button for a view pager layout.
+        layout.findViewById(R.id.btnGoto).setOnClickListener(v -> {
+            Toast.makeText(mContext, (CharSequence) v.getTag(), Toast.LENGTH_SHORT).show();
+            // Process for opening an fragment here.
+        });
+
+
         collection.addView(layout);
+
         return layout;
     }
 

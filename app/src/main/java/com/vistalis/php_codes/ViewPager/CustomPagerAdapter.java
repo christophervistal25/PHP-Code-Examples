@@ -1,12 +1,13 @@
 package com.vistalis.php_codes.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.vistalis.php_codes.ArticlesActivity;
 import com.vistalis.php_codes.R;
 
 public class CustomPagerAdapter extends PagerAdapter {
@@ -23,16 +24,12 @@ public class CustomPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
 
-
-        // Setting an event for each button for a view pager layout.
         layout.findViewById(R.id.btnGoto).setOnClickListener(v -> {
-            Toast.makeText(mContext, (CharSequence) v.getTag(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), ArticlesActivity.class);
 
-            // Remove all layouts
-            layout.removeAllViews();
+            intent.putExtra("CATEGORY", String.valueOf(v.getTag()));
 
-            // Open the fragment.
-
+            v.getContext().startActivity(intent);
         });
 
 

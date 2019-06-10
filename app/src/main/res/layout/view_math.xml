@@ -6,7 +6,7 @@
         android:id="@+id/categoryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PHP | Arrays"
+        android:text="PHP | Math"
         android:layout_gravity="center_horizontal"
         android:textSize="28sp"
         android:textColor="@android:color/black"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/categoryTitle"
         android:text="Read"
-        android:tag="Php Arrays"
+        android:tag="Math"
         />
 
 

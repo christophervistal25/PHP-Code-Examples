@@ -4,27 +4,28 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "articles")
-public class Articles {
+public class Article {
     @PrimaryKey(autoGenerate = true)
     public int id;
-    public int article_id;
+    public int category_id;
     public String title;
     public String content;
     public boolean favorite = false;
 
-    public Articles(int article_id, String title, String content, boolean favorite) {
-        this.setArticle_id(article_id);
+    public Article(int category_id, String title, String content, boolean favorite) {
+        this.setCategory_id(category_id);
         this.setTitle(title);
         this.setContent(content);
         this.setFavorite(favorite);
     }
 
-    public int getArticle_id() {
-        return article_id;
+
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setArticle_id(int article_id) {
-        this.article_id = article_id;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
     public String getTitle() {

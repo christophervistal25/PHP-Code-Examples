@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/categoryTitle"
         android:text="Read"
-        android:tag="Php Basics"
+        android:tag="Basics"
         />
 
 

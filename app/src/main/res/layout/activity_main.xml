@@ -8,12 +8,19 @@
     tools:context=".MainActivity">
 
 
+
     <android.support.v4.view.ViewPager
         android:background="#ffffff"
         android:layout_centerInParent="true"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -29,3 +36,4 @@
 
 
 </RelativeLayout>
+

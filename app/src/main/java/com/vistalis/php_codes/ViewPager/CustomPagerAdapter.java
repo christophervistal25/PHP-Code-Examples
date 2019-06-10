@@ -1,13 +1,16 @@
 package com.vistalis.php_codes.ViewPager;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.vistalis.php_codes.ArticlesActivity;
+import com.vistalis.php_codes.ArticlesFragment;
 import com.vistalis.php_codes.R;
 
 public class CustomPagerAdapter extends PagerAdapter {
@@ -23,20 +26,20 @@ public class CustomPagerAdapter extends PagerAdapter {
         ModelObject modelObject = ModelObject.values()[position];
         LayoutInflater inflater = LayoutInflater.from(mContext);
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
+        collection.addView(layout);
 
         layout.findViewById(R.id.btnGoto).setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), ArticlesActivity.class);
-
-            intent.putExtra("CATEGORY", String.valueOf(v.getTag()));
-
-            v.getContext().startActivity(intent);
+            ArticlesFragment fragmentArticles = new ArticlesFragment();
+            FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.fragmentContainer, fragmentArticles);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
-
-
-        collection.addView(layout);
 
         return layout;
     }
+
+
 
     @Override
     public void destroyItem(ViewGroup collection, int position, Object view) {

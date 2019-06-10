@@ -24,15 +24,16 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new CustomPagerAdapter(this));
 
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
-              case R.id.action_favorites:
-                  Toast.makeText(this, "You clicked the favorites button", Toast.LENGTH_SHORT).show();
+                case R.id.action_favorites:
+                    Toast.makeText(this, "You clicked the favorites button", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.action_feedback:
-                  Toast.makeText(this, "You clicked the feedback button", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "You clicked the feedback button", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.action_playground:
@@ -44,11 +45,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-     }
+    }
 
 
-    private void setActivityToFullScreen()
-    {
+    private void setActivityToFullScreen() {
         Window window = getWindow();
         WindowManager.LayoutParams winParams = window.getAttributes();
         winParams.flags &= ~WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
@@ -58,3 +58,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+

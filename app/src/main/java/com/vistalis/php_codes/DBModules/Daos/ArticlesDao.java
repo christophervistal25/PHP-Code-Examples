@@ -16,4 +16,7 @@ public interface ArticlesDao {
 
     @Query("SELECT * FROM articles")
     List<Article> getAllArticles();
+
+    @Query("SELECT * FROM articles WHERE category_id = :category_id")
+    List<Article> getArticlesByCategoryId(int category_id);
 }

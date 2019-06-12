@@ -3,16 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".ArticlesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/fragmentArticleContentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <EditText
+        android:id="@+id/searchField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:layout_centerInParent="true"
-        android:text="@string/hello_blank_fragment" />
+        android:textColor="#FF000000"
+        android:hint="Search..."
+        android:textColorHint="#FF000000"
+        android:background="#fff"
+        android:padding="5dp"
+        android:layout_margin="16dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/searchField"
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        >
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

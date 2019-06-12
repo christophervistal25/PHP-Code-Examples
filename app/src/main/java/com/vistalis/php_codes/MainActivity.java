@@ -11,6 +11,9 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
+import com.vistalis.php_codes.DBModules.DB;
+import com.vistalis.php_codes.Repositories.ArticleRepository;
+import com.vistalis.php_codes.Repositories.CategoryRepository;
 import com.vistalis.php_codes.ViewPager.CustomPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setActivityToFullScreen();
+
+        // this is for development purpose
+//        this.sampleData();
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new CustomPagerAdapter(this));
@@ -45,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void sampleData() {
+        CategoryRepository.create(this,"Basics","This is a sample for php basics");
+        CategoryRepository.create(this,"Arrays","This is a sample for array");
+        CategoryRepository.create(this,"Math","This is a sample for math functions");
+
+        ArticleRepository.create(this,1,"Basic one","This is a sample content");
+        ArticleRepository.create(this,1,"Basic two","This is a sample content");
+        ArticleRepository.create(this,1,"Basic three","This is a sample content");
+
+        ArticleRepository.create(this,2,"Array one","This is a sample content");
+        ArticleRepository.create(this,2,"Array two","This is a sample content");
+        ArticleRepository.create(this,2,"Array three","This is a sample content");
+
+        ArticleRepository.create(this,3,"Math one","This is a sample content");
+        ArticleRepository.create(this,3,"Math two","This is a sample content");
+        ArticleRepository.create(this,3,"Math three","This is a sample content");
     }
 
 

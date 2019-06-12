@@ -4,13 +4,13 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "categories")
-public class Categories {
+public class Category {
     @PrimaryKey(autoGenerate = true)
     public int id;
     public String title;
     public String description;
 
-    public Categories(String title, String description) {
+    public Category(String title, String description) {
         this.setTitle(title);
         this.setDescription(description);
     }

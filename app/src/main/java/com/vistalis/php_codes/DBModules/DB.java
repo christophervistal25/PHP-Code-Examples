@@ -7,15 +7,17 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.vistalis.php_codes.DBModules.Daos.ArticlesDao;
+import com.vistalis.php_codes.DBModules.Daos.CategoriesDao;
 import com.vistalis.php_codes.DBModules.Models.Article;
-import com.vistalis.php_codes.DBModules.Models.Categories;
+import com.vistalis.php_codes.DBModules.Models.Category;
 
 
-@Database(entities = {Categories.class, Article.class},version = 1)
+@Database(entities = {Category.class, Article.class},version = 1)
 public abstract class DB extends RoomDatabase {
 
     private static DB appDatabase;
     public abstract ArticlesDao articlesDao();
+    public abstract CategoriesDao categoriesDao();
     private Context context;
 
 

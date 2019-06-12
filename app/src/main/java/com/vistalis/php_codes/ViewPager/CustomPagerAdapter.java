@@ -1,6 +1,7 @@
 package com.vistalis.php_codes.ViewPager;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
@@ -28,12 +29,24 @@ public class CustomPagerAdapter extends PagerAdapter {
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
         collection.addView(layout);
 
-        layout.findViewById(R.id.btnGoto).setOnClickListener(v -> {
+        // for opening the Articles Fragment
+
+        layout.findViewById(R.id.btnGoto).setOnClickListener(view -> {
+
+            Bundle bundle = new Bundle();
+            bundle.putString("selected_category", String.valueOf( view.getTag()) );
+
             ArticlesFragment fragmentArticles = new ArticlesFragment();
             FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+
+            fragmentArticles.setArguments(bundle);
+
             fragmentTransaction.add(R.id.fragmentContainer, fragmentArticles);
+
             fragmentTransaction.addToBackStack(null);
+
             fragmentTransaction.commit();
+
         });
 
         return layout;

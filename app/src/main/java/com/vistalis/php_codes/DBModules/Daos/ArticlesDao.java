@@ -23,4 +23,7 @@ public interface ArticlesDao {
 
     @Query("SELECT * FROM articles WHERE category_id = :category_id")
     List<Article> getArticlesByCategoryId(int category_id);
+
+    @Query("SELECT * FROM articles WHERE favorite = 1 ")
+    List<Article> getAllFavoriteArticles();
 }

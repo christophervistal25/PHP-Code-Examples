@@ -1,10 +1,12 @@
 package com.vistalis.php_codes;
 
+import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +19,8 @@ import com.vistalis.php_codes.Repositories.ArticleRepository;
 import com.vistalis.php_codes.Repositories.CategoryRepository;
 import com.vistalis.php_codes.ViewPager.CustomPagerAdapter;
 
+import hotchemi.android.rate.AppRate;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setActivityToFullScreen();
+
+        this.displayAppRatingDialog();
 
         // this is for development purpose
         // this.sampleData();
@@ -34,31 +40,42 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.action_favorites:
+                        FavoritesFragment favoritesFragment = new FavoritesFragment();
 
-                    FavoritesFragment favoritesFragment = new FavoritesFragment();
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        // Checking if there's a fragment that attach to a container.
+                            if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
+                                fragmentTransaction.replace(R.id.fragmentContainer, favoritesFragment);
+                            } else {
+                                fragmentTransaction.add(R.id.fragmentContainer, favoritesFragment);
+                            }
 
-                    // Checking if there's a fragment that attach to a container.
-                        if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
-                            fragmentTransaction.replace(R.id.fragmentContainer, favoritesFragment);
-                        } else {
-                            fragmentTransaction.add(R.id.fragmentContainer, favoritesFragment);
-                        }
+                        fragmentTransaction.addToBackStack(null);
 
-                    fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
 
-                    fragmentTransaction.commit();
-
-                    break;
-
-                case R.id.action_feedback:
-                    Toast.makeText(this, "You clicked the feedback button", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.action_playground:
-                    Toast.makeText(this, "You clicked the playground button", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this,PlayGroundActivity.class);
+                        startActivity(intent);
+                    break;
+
+                case R.id.action_feedback:
+                        FeedBackFragment feedBackFragment = new FeedBackFragment();
+
+                        // Checking if there's a fragment that attach to a container.
+                        if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
+                            fragmentTransaction.replace(R.id.fragmentContainer, feedBackFragment);
+                        } else {
+                            fragmentTransaction.add(R.id.fragmentContainer, feedBackFragment);
+                        }
+
+                        fragmentTransaction.addToBackStack(null);
+
+                        fragmentTransaction.commit();
                     break;
 
             }
@@ -67,6 +84,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void displayAppRatingDialog() {
+        // callback listener.
+        AppRate.with(this)
+                .setInstallDays(0) // default 10, 0 means install day.
+                .setLaunchTimes(3) // default 10
+                .setRemindInterval(2) // default 1
+                .setShowLaterButton(true) // default true
+                .setDebug(false) // default false
+                .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Integer.toString(which)))
+                .monitor();
+
+
+        // Show a dialog if meets conditions
+        AppRate.showRateDialogIfMeetsConditions(this);
+    }
+
+
 
     private void sampleData() {
         CategoryRepository.create(this,"Basics","This is a sample for php basics");

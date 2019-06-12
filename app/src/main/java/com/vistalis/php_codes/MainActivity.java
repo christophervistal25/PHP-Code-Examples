@@ -1,6 +1,7 @@
 package com.vistalis.php_codes;
 
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         this.setActivityToFullScreen();
 
         // this is for development purpose
-//        this.sampleData();
+        // this.sampleData();
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new CustomPagerAdapter(this));
@@ -35,7 +36,21 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_favorites:
-                    Toast.makeText(this, "You clicked the favorites button", Toast.LENGTH_SHORT).show();
+
+                    FavoritesFragment favoritesFragment = new FavoritesFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+                    // Checking if there's a fragment that attach to a container.
+                        if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
+                            fragmentTransaction.replace(R.id.fragmentContainer, favoritesFragment);
+                        } else {
+                            fragmentTransaction.add(R.id.fragmentContainer, favoritesFragment);
+                        }
+
+                    fragmentTransaction.addToBackStack(null);
+
+                    fragmentTransaction.commit();
+
                     break;
 
                 case R.id.action_feedback:
@@ -58,17 +73,17 @@ public class MainActivity extends AppCompatActivity {
         CategoryRepository.create(this,"Arrays","This is a sample for array");
         CategoryRepository.create(this,"Math","This is a sample for math functions");
 
-        ArticleRepository.create(this,1,"Basic one","This is a sample content");
-        ArticleRepository.create(this,1,"Basic two","This is a sample content");
-        ArticleRepository.create(this,1,"Basic three","This is a sample content");
+        ArticleRepository.create(this,1,"Basic one","This is a sample content for basic one");
+        ArticleRepository.create(this,1,"Basic two","This is a sample content for basic two");
+        ArticleRepository.create(this,1,"Basic three","This is a sample content for basic three");
 
-        ArticleRepository.create(this,2,"Array one","This is a sample content");
-        ArticleRepository.create(this,2,"Array two","This is a sample content");
-        ArticleRepository.create(this,2,"Array three","This is a sample content");
+        ArticleRepository.create(this,2,"Array one","This is a sample content for array one");
+        ArticleRepository.create(this,2,"Array two","This is a sample content for array two");
+        ArticleRepository.create(this,2,"Array three","This is a sample content for array three");
 
-        ArticleRepository.create(this,3,"Math one","This is a sample content");
-        ArticleRepository.create(this,3,"Math two","This is a sample content");
-        ArticleRepository.create(this,3,"Math three","This is a sample content");
+        ArticleRepository.create(this,3,"Math one","This is a sample content for math one");
+        ArticleRepository.create(this,3,"Math two","This is a sample content for math two");
+        ArticleRepository.create(this,3,"Math three","This is a sample content for math three");
     }
 
 

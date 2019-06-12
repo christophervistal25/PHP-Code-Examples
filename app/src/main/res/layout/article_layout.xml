@@ -5,14 +5,27 @@
     android:orientation="vertical"
    >
 
-        <TextView
-            android:gravity="center_vertical"
-            android:id="@+id/articleTitle"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:padding="20dp"
-            android:layout_marginTop="2dp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/articleTitle"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:padding="20dp"
+                    android:layout_marginTop="2dp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/btnAddToFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+        </RelativeLayout>
 
 </RelativeLayout>

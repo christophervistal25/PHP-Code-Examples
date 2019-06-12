@@ -6,11 +6,6 @@
     android:background="#ffffff"
     tools:context=".ArticlesFragment">
 
-    <FrameLayout
-        android:id="@+id/fragmentArticleContentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
     <EditText
         android:id="@+id/searchField"

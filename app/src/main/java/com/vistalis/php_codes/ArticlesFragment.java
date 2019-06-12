@@ -5,16 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.vistalis.php_codes.Adapters.ArticleAdapter;
 import com.vistalis.php_codes.DBModules.DB;
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ArticlesFragment extends Fragment {
+public class ArticlesFragment extends Fragment implements ArticleAdapter.OnClickResponse {
 
     RecyclerView recyclerView;
     ArticleAdapter articleAdapter;
@@ -93,12 +95,14 @@ public class ArticlesFragment extends Fragment {
         article_list = DB.getInstance(getContext()).articlesDao().getArticlesByCategoryId(categoryId);
 
         articleAdapter = new ArticleAdapter(article_list);
+        articleAdapter.OnClickResponse = this;
+
 
         recyclerView = getActivity().findViewById(R.id.recycler_view);
 
         recyclerView.addItemDecoration( new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL) );
 
-        layoutManager = new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getActivity());
 
         recyclerView.setLayoutManager(layoutManager);
 
@@ -113,4 +117,22 @@ public class ArticlesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_articles, container, false);
     }
 
+    @Override
+    public void onSuccess(String articleContent) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("article_content", articleContent);
+
+        ArticleContentFragment articleContentFragment = new ArticleContentFragment();
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+        articleContentFragment.setArguments(bundle);
+
+        fragmentTransaction.replace(R.id.fragmentContainer, articleContentFragment);
+
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
+
+    }
 }

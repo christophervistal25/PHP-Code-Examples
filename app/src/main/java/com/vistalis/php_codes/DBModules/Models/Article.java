@@ -19,6 +19,13 @@ public class Article {
         this.setFavorite(favorite);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCategory_id() {
         return category_id;

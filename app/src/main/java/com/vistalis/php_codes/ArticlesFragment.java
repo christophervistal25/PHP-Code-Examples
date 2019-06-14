@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.vistalis.php_codes.Adapters.ArticleAdapter;
 import com.vistalis.php_codes.DBModules.DB;
 import com.vistalis.php_codes.DBModules.Models.Article;
+import com.vistalis.php_codes.Repositories.ArticleRepository;
+import com.vistalis.php_codes.Repositories.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +50,8 @@ public class ArticlesFragment extends Fragment implements ArticleAdapter.OnClick
 
             String selected_category = getArguments().getString("selected_category");
 
-            // Get the category id
-            int categoryId = DB.getInstance(getContext()).categoriesDao().getCategoryIdByTitle(selected_category);
 
+            int categoryId = CategoryRepository.getIdByTitle(getContext(),selected_category);
 
             this.buildRecyclerView(categoryId);
 

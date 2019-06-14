@@ -26,4 +26,5 @@ public interface ArticlesDao {
 
     @Query("SELECT * FROM articles WHERE favorite = 1 ")
     List<Article> getAllFavoriteArticles();
+
 }

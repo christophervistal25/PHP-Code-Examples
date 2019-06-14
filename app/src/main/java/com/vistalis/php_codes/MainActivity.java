@@ -29,17 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.setActivityToFullScreen();
-
         this.displayAppRatingDialog();
 
 
-
-        // this is for development purpose
-        // this.sampleData();
-
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new CustomPagerAdapter(this));
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -116,26 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Show a dialog if meets conditions
         AppRate.showRateDialogIfMeetsConditions(this);
-    }
-
-
-
-    private void sampleData() {
-        CategoryRepository.create(this,"Basics","This is a sample for php basics");
-        CategoryRepository.create(this,"Arrays","This is a sample for array");
-        CategoryRepository.create(this,"Math","This is a sample for math functions");
-
-        ArticleRepository.create(this,1,"Basic one","This is a sample content for basic one");
-        ArticleRepository.create(this,1,"Basic two","This is a sample content for basic two");
-        ArticleRepository.create(this,1,"Basic three","This is a sample content for basic three");
-
-        ArticleRepository.create(this,2,"Array one","This is a sample content for array one");
-        ArticleRepository.create(this,2,"Array two","This is a sample content for array two");
-        ArticleRepository.create(this,2,"Array three","This is a sample content for array three");
-
-        ArticleRepository.create(this,3,"Math one","This is a sample content for math one");
-        ArticleRepository.create(this,3,"Math two","This is a sample content for math two");
-        ArticleRepository.create(this,3,"Math three","This is a sample content for math three");
     }
 
 

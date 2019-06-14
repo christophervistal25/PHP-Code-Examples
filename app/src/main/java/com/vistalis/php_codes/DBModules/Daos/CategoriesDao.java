@@ -21,6 +21,12 @@ public interface CategoriesDao {
     @Query("SELECT id FROM categories WHERE title = :title")
     int getCategoryIdByTitle(String title);
 
+    @Query("SELECT COUNT(id) FROM categories")
+    int noOfCategories();
+
+
+
+
 
 
 }

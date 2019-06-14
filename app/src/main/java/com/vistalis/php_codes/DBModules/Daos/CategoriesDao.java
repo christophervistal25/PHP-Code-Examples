@@ -6,6 +6,7 @@ import android.arch.persistence.room.Query;
 
 import com.vistalis.php_codes.DBModules.Models.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +24,9 @@ public interface CategoriesDao {
 
     @Query("SELECT COUNT(id) FROM categories")
     int noOfCategories();
+
+    @Query("SELECT description FROM categories")
+    List<String> getAllDescription();
 
 
 

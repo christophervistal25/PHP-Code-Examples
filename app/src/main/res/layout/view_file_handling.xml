@@ -1,26 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:background="#fff"
+    android:layout_width="284.11dp"
+    android:layout_height="220.79dp">
 
     <TextView
         android:id="@+id/categoryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PHP | File Handling"
-        android:layout_gravity="center_horizontal"
-        android:textSize="28sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
+        android:textSize="24sp"
+        android:textColor="#657786"
+        android:fontFamily="@font/arial_black"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/categoryDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:textSize="17sp"
+        android:textColor="#657786"
+        android:fontFamily="@font/roboto_medium"
+        android:layout_centerHorizontal="true" />
+
 
     <Button
         android:id="@+id/btnGoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/categoryTitle"
+        android:layout_width="254dp"
+        android:layout_height="37dp"
+        android:layout_centerHorizontal="true"
+        android:background="#33CCFF"
+        android:fontFamily="@font/arial_black"
         android:text="@string/explore"
         android:tag="File Handling"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
         />
 
 

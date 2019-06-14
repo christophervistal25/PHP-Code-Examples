@@ -127,6 +127,8 @@ public class ArticlesFragment extends Fragment implements ArticleAdapter.OnClick
         ArticleContentFragment articleContentFragment = new ArticleContentFragment();
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
 
+        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
         articleContentFragment.setArguments(bundle);
 
         fragmentTransaction.replace(R.id.fragmentContainer, articleContentFragment);

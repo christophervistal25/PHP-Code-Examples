@@ -9,17 +9,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vistalis.php_codes.ArticlesFragment;
+import com.vistalis.php_codes.DBModules.DB;
 import com.vistalis.php_codes.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomPagerAdapter extends PagerAdapter {
 
     private Context mContext;
-
-    public CustomPagerAdapter(Context context) {
+    private List<String> pageDescription;
+    public CustomPagerAdapter(Context context)
+    {
         mContext = context;
+        pageDescription = DB.getInstance(context).categoriesDao().getAllDescription();
     }
 
     @Override
@@ -29,7 +36,8 @@ public class CustomPagerAdapter extends PagerAdapter {
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
         collection.addView(layout);
 
-        // for opening the Articles Fragment
+        TextView itemDescription = layout.findViewById(R.id.categoryDescription);
+        itemDescription.setText(pageDescription.get(position));
 
         layout.findViewById(R.id.btnGoto).setOnClickListener(view -> {
 
@@ -38,6 +46,8 @@ public class CustomPagerAdapter extends PagerAdapter {
 
             ArticlesFragment fragmentArticles = new ArticlesFragment();
             FragmentTransaction fragmentTransaction = ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
 
             fragmentArticles.setArguments(bundle);
 

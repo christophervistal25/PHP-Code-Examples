@@ -13,21 +13,29 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
+import com.vistalis.php_codes.Helpers.SharedPref;
 import com.vistalis.php_codes.Repositories.ArticleRepository;
 import com.vistalis.php_codes.Repositories.CategoryRepository;
 import com.vistalis.php_codes.ViewPager.CustomPagerAdapter;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import hotchemi.android.rate.AppRate;
 
 public class MainActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setSplashScreenAlreadyOpen();
         this.setActivityToFullScreen();
         this.displayAppRatingDialog();
 
@@ -38,18 +46,21 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
             switch (item.getItemId()) {
                 case R.id.action_favorites:
 
-                            if  ( isFavoriteFragmentCurrentLoad() ) {
+                            if  ( this.isThisFragmentLoad("FAVORITE_FRAGMENT") ) {
                                     return false;
+                            } else {
+                                this.isFragmentContainerHasAChild(fragmentTransaction, new FavoritesFragment(),"FAVORITE_FRAGMENT");
+
+                                fragmentTransaction.addToBackStack(null);
+
+                                fragmentTransaction.commit();
                             }
 
-                            isFragmentContainerHasAChild(fragmentTransaction, new FavoritesFragment(),"FAVORITE_FRAGMENT");
-
-                            fragmentTransaction.addToBackStack(null);
-
-                            fragmentTransaction.commit();
                     break;
 
                 case R.id.action_playground:
@@ -59,15 +70,16 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.action_feedback:
 
-                        if  ( isFeedbackFragmentCurrentLoad() ) {
+                        if  ( this.isThisFragmentLoad("FEEDBACK_FRAGMENT") ) {
                             return false;
+                        } else {
+                            this.isFragmentContainerHasAChild(fragmentTransaction, new FeedBackFragment(), "FEEDBACK_FRAGMENT");
+
+                            fragmentTransaction.addToBackStack(null);
+
+                            fragmentTransaction.commit();
                         }
 
-                        isFragmentContainerHasAChild(fragmentTransaction, new FeedBackFragment(), "FEEDBACK_FRAGMENT");
-
-                        fragmentTransaction.addToBackStack(null);
-
-                        fragmentTransaction.commit();
                     break;
 
             }
@@ -75,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void setSplashScreenAlreadyOpen() {
+        SharedPref.setSharedPreferenceBoolean(getApplicationContext(),"is_splash_already_open",true);
     }
 
     private void isFragmentContainerHasAChild(FragmentTransaction fragmentTransaction, Fragment fragment, String fragmentTag) {
@@ -85,14 +101,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isFeedbackFragmentCurrentLoad()
+    private boolean isThisFragmentLoad(String fragmentTag)
     {
-        return getSupportFragmentManager().findFragmentByTag("FEEDBACK_FRAGMENT") instanceof FeedBackFragment;
-    }
-
-    private boolean isFavoriteFragmentCurrentLoad()
-    {
-        return getSupportFragmentManager().findFragmentByTag("FAVORITE_FRAGMENT") instanceof FavoritesFragment;
+        return getSupportFragmentManager().getFragments().contains( getSupportFragmentManager().findFragmentByTag(fragmentTag) );
     }
 
 

@@ -34,14 +34,14 @@ public class CategoryRepository {
     public void insertAllCategories()
     {
         if ( !this.isAllCategoriesInserted() ) {
-            this.create("Basics","Learn more about PHP Basics");
-            this.create("Arrays", "Learn more about PHP Arrays");
-            this.create("Strings", "Learn more about PHP Strings");
-            this.create("Math", "Learn more about PHP Math");
-            this.create("Functions", "Learn more about different PHP Functions");
-            this.create("File Handling", "Learn more about different PHP File Handling");
-            this.create("Input & Output", "Learn more about different PHP Input & Output");
-            this.create("Sample Programs", "Learn more about different PHP Sample Programs");
+            this.create("Basics","Learn more about Basics");
+            this.create("Arrays", "Learn more about Arrays");
+            this.create("Strings", "Learn more about Strings");
+            this.create("Math", "Learn more about Math");
+            this.create("Functions", "Learn more about different Functions");
+            this.create("File Handling", "Learn more about different File Handling");
+            this.create("Input & Output", "Learn more about different Input & Output");
+            this.create("Sample Programs", "Learn more about different Sample Programs");
         }
     }
 

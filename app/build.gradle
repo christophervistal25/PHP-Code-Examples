@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.github.hotchemi:android-rate:1.0.1'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.github.hotchemi:android-rate:1.0.1'
+    implementation 'io.soluble.pjb:php-java-bridge:7.1.3'
 }

@@ -3,6 +3,7 @@
     <string name="basics">Basics</string>
     <string name="arrays">Arrays</string>
     <string name="math">Math</string>
+    <string name="explore">Explore</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Favorites fragment</string>

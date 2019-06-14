@@ -2,6 +2,7 @@ package com.vistalis.php_codes;
 
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,17 +12,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import android.widget.Toast;
 
-
-import com.vistalis.php_codes.DBModules.DB;
 import com.vistalis.php_codes.Repositories.ArticleRepository;
 import com.vistalis.php_codes.Repositories.CategoryRepository;
 import com.vistalis.php_codes.ViewPager.CustomPagerAdapter;
 
+
 import hotchemi.android.rate.AppRate;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         this.setActivityToFullScreen();
 
         this.displayAppRatingDialog();
+
+
 
         // this is for development purpose
         // this.sampleData();
@@ -43,19 +46,16 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
                 case R.id.action_favorites:
-                        FavoritesFragment favoritesFragment = new FavoritesFragment();
 
-                        // Checking if there's a fragment that attach to a container.
-                            if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
-                                fragmentTransaction.replace(R.id.fragmentContainer, favoritesFragment);
-                            } else {
-                                fragmentTransaction.add(R.id.fragmentContainer, favoritesFragment);
+                            if  ( isFavoriteFragmentCurrentLoad() ) {
+                                    return false;
                             }
 
-                        fragmentTransaction.addToBackStack(null);
+                            isFragmentContainerHasAChild(fragmentTransaction, new FavoritesFragment(),"FAVORITE_FRAGMENT");
 
-                        fragmentTransaction.commit();
+                            fragmentTransaction.addToBackStack(null);
 
+                            fragmentTransaction.commit();
                     break;
 
                 case R.id.action_playground:
@@ -64,14 +64,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.action_feedback:
-                        FeedBackFragment feedBackFragment = new FeedBackFragment();
 
-                        // Checking if there's a fragment that attach to a container.
-                        if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
-                            fragmentTransaction.replace(R.id.fragmentContainer, feedBackFragment);
-                        } else {
-                            fragmentTransaction.add(R.id.fragmentContainer, feedBackFragment);
+                        if  ( isFeedbackFragmentCurrentLoad() ) {
+                            return false;
                         }
+
+                        isFragmentContainerHasAChild(fragmentTransaction, new FeedBackFragment(), "FEEDBACK_FRAGMENT");
 
                         fragmentTransaction.addToBackStack(null);
 
@@ -84,6 +82,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void isFragmentContainerHasAChild(FragmentTransaction fragmentTransaction, Fragment fragment, String fragmentTag) {
+        if ( getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
+            fragmentTransaction.replace(R.id.fragmentContainer, fragment, fragmentTag);
+        } else {
+            fragmentTransaction.add(R.id.fragmentContainer, fragment, fragmentTag);
+        }
+    }
+
+    private boolean isFeedbackFragmentCurrentLoad()
+    {
+        return getSupportFragmentManager().findFragmentByTag("FEEDBACK_FRAGMENT") instanceof FeedBackFragment;
+    }
+
+    private boolean isFavoriteFragmentCurrentLoad()
+    {
+        return getSupportFragmentManager().findFragmentByTag("FAVORITE_FRAGMENT") instanceof FavoritesFragment;
+    }
+
 
     private void displayAppRatingDialog() {
         // callback listener.

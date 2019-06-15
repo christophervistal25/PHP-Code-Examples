@@ -28,6 +28,9 @@ public interface CategoriesDao {
     @Query("SELECT description FROM categories")
     List<String> getAllDescription();
 
+    @Query("SELECT title FROM categories")
+    List<String> getAllTitle();
+
 
 
 

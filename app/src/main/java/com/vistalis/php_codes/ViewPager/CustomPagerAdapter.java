@@ -2,31 +2,32 @@ package com.vistalis.php_codes.ViewPager;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vistalis.php_codes.ArticlesFragment;
 import com.vistalis.php_codes.DBModules.DB;
 import com.vistalis.php_codes.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomPagerAdapter extends PagerAdapter {
 
     private Context mContext;
-    private List<String> pageDescription;
+    private List<String> categoriesDescription;
+    private List<String> categoriesTitle;
+
     public CustomPagerAdapter(Context context)
     {
         mContext = context;
-        pageDescription = DB.getInstance(context).categoriesDao().getAllDescription();
+        categoriesDescription = DB.getInstance(context).categoriesDao().getAllDescription();
+        categoriesTitle = DB.getInstance(context).categoriesDao().getAllTitle();
     }
 
     @Override
@@ -36,10 +37,18 @@ public class CustomPagerAdapter extends PagerAdapter {
         ViewGroup layout = (ViewGroup) inflater.inflate(modelObject.getLayoutResId(), collection, false);
         collection.addView(layout);
 
+        TextView itemTitle = layout.findViewById(R.id.categoryTitle);
         TextView itemDescription = layout.findViewById(R.id.categoryDescription);
-        itemDescription.setText(pageDescription.get(position));
+        Button btnGoto = layout.findViewById(R.id.btnGoto);
 
-        layout.findViewById(R.id.btnGoto).setOnClickListener(view -> {
+        btnGoto.setTag(categoriesTitle.get(position));
+
+        itemTitle.setText(categoriesTitle.get(position));
+        itemDescription.setText(categoriesDescription.get(position));
+
+
+
+       btnGoto.setOnClickListener(view -> {
 
             Bundle bundle = new Bundle();
             bundle.putString("selected_category", String.valueOf( view.getTag()) );
@@ -60,6 +69,7 @@ public class CustomPagerAdapter extends PagerAdapter {
         });
 
         return layout;
+
     }
 
 

@@ -38,10 +38,10 @@ public class CategoryRepository {
             this.create("Arrays", "Learn more about Arrays");
             this.create("Strings", "Learn more about Strings");
             this.create("Math", "Learn more about Math");
-            this.create("Functions", "Learn more about different Functions");
-            this.create("File Handling", "Learn more about different File Handling");
-            this.create("Input & Output", "Learn more about different Input & Output");
-            this.create("Sample Programs", "Learn more about different Sample Programs");
+            this.create("Functions", "Learn more about Functions");
+            this.create("File Handling", "Learn more about File Handling");
+            this.create("Input & Output", "Learn more about Input & Output");
+            this.create("Programs", "Learn more about Sample Programs");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.vistalis.php_codes;
 
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -69,11 +70,17 @@ public class FavoritesFragment extends Fragment implements FavoritesAdapter.OnCl
         article_list = DB.getInstance(getContext()).articlesDao().getAllFavoriteArticles();
 
         favoriteAdapter = new FavoritesAdapter(article_list);
+
         favoriteAdapter.OnClickResponse = this;
 
         recyclerView = getActivity().findViewById(R.id.recycler_view);
 
-        recyclerView.addItemDecoration( new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL) );
+        recyclerView.addItemDecoration( new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL) {
+             @Override
+             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                    // Do not draw the divider
+             }
+        });
 
         layoutManager = new LinearLayoutManager(getActivity());
 
@@ -110,7 +117,9 @@ public class FavoritesFragment extends Fragment implements FavoritesAdapter.OnCl
         bundle.putString("article_content", articleContent);
 
         ArticleContentFragment articleContentFragment = new ArticleContentFragment();
+
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
 
         articleContentFragment.setArguments(bundle);
 

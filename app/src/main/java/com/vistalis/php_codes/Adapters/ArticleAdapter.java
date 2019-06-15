@@ -45,7 +45,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleH
         holder.articleTitle.setText(article.getTitle());
 
         holder.btnAddToFavorite.setOnClickListener(v -> {
-            String message = "";
+            String message;
+
             if ( article.isFavorite() ) {
                 article.setFavorite(false);
                 message  = article.getTitle() + " successfully remove to your favorites.";

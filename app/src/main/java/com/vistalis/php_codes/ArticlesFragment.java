@@ -1,6 +1,7 @@
 package com.vistalis.php_codes;
 
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -101,7 +102,12 @@ public class ArticlesFragment extends Fragment implements ArticleAdapter.OnClick
 
         recyclerView = getActivity().findViewById(R.id.recycler_view);
 
-        recyclerView.addItemDecoration( new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL) );
+        recyclerView.addItemDecoration( new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL) {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                // Do not draw the divider
+            }
+        });
 
         layoutManager = new LinearLayoutManager(getActivity());
 
@@ -114,8 +120,19 @@ public class ArticlesFragment extends Fragment implements ArticleAdapter.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.hideNotificationBar();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_articles, container, false);
+    }
+
+    private void hideNotificationBar() {
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     @Override

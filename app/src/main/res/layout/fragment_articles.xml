@@ -4,19 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#33CCFF"
+    android:layout_marginBottom="45dp"
     tools:context=".ArticlesFragment">
 
 
     <EditText
-        android:id="@+id/searchField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#FF000000"
-        android:hint="Search..."
-        android:textColorHint="#FF000000"
-        android:background="#fff"
-        android:padding="5dp"
-        android:layout_margin="16dp"/>
+            android:id="@+id/searchField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#B7657786"
+            android:hint="Search article"
+            android:textColor="#657786"
+            android:background="#fff"
+            android:padding="13dp"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/roboto_medium"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:drawablePadding="3dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/searchField"

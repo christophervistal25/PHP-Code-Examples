@@ -1,6 +1,5 @@
 package com.vistalis.php_codes;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,21 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-
-
 import com.vistalis.php_codes.Helpers.SharedPref;
-import com.vistalis.php_codes.Repositories.ArticleRepository;
-import com.vistalis.php_codes.Repositories.CategoryRepository;
 import com.vistalis.php_codes.ViewPager.CustomPagerAdapter;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import hotchemi.android.rate.AppRate;
 
@@ -69,20 +57,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     break;
 
-                case R.id.action_feedback:
-
-                        if  ( this.isThisFragmentLoad("FEEDBACK_FRAGMENT") ) {
-                            return false;
-                        } else {
-                            this.isFragmentContainerHasAChild(fragmentTransaction, new FeedBackFragment(), "FEEDBACK_FRAGMENT");
-
-                            fragmentTransaction.addToBackStack(null);
-
-                            fragmentTransaction.commit();
-                        }
-
-                    break;
-
             }
             return true;
         });
@@ -118,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                 .setDebug(false) // default false
                 .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Integer.toString(which)))
                 .monitor();
-
 
         // Show a dialog if meets conditions
         AppRate.showRateDialogIfMeetsConditions(this);

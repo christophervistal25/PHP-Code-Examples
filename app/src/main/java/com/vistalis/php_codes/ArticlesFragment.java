@@ -1,6 +1,7 @@
 package com.vistalis.php_codes;
 
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -138,21 +139,11 @@ public class ArticlesFragment extends Fragment implements ArticleAdapter.OnClick
     @Override
     public void onSuccess(String articleContent) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString("article_content", articleContent);
+        Intent intent = new Intent(getActivity(),ArticleContent.class);
 
-        ArticleContentFragment articleContentFragment = new ArticleContentFragment();
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        intent.putExtra("article_content", articleContent);
 
-        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-
-        articleContentFragment.setArguments(bundle);
-
-        fragmentTransaction.replace(R.id.fragmentContainer, articleContentFragment);
-
-        fragmentTransaction.addToBackStack(null);
-
-        fragmentTransaction.commit();
+        startActivity(intent);
 
     }
 }

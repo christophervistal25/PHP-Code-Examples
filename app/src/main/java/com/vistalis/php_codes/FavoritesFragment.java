@@ -1,6 +1,7 @@
 package com.vistalis.php_codes;
 
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -113,23 +114,12 @@ public class FavoritesFragment extends Fragment implements FavoritesAdapter.OnCl
 
     @Override
     public void onSuccess(String articleContent) {
-        Bundle bundle = new Bundle();
-        bundle.putString("article_content", articleContent);
 
-        ArticleContentFragment articleContentFragment = new ArticleContentFragment();
+        Intent intent = new Intent(getActivity(),ArticleContent.class);
 
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        intent.putExtra("article_content", articleContent);
 
-        articleContentFragment.setArguments(bundle);
+        startActivity(intent);
 
-        if ( getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) != null ) {
-            fragmentTransaction.replace(R.id.fragmentContainer, articleContentFragment);
-        } else {
-            fragmentTransaction.add(R.id.fragmentContainer, articleContentFragment);
-        }
-        fragmentTransaction.addToBackStack(null);
-
-        fragmentTransaction.commit();
     }
 }
